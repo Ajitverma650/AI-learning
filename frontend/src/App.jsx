@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Upload, FileText, Send, Loader2 } from 'lucide-react';
 
-const API_URL = 'http://localhost:5000/api/rag';
+const API_URL = import.meta.env.VITE_API_URL || 'https://ai-learning-48f1.onrender.com';
 
 export default function App() {
   const [file, setFile] = useState(null);
@@ -30,7 +30,7 @@ export default function App() {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`${API_URL}/upload`, {
+      const response = await fetch(`${API_URL}/api/rag/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -58,7 +58,7 @@ export default function App() {
     setAnswer('');
 
     try {
-      const response = await fetch(`${API_URL}/ask`, {
+      const response = await fetch(`${API_URL}/api/rag/ask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
